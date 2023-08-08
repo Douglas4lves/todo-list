@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
- <img src="https://img.shields.io/static/v1?label=LinkedIn&message=seu-endereco-do-linkedin&color=black&labelColor=red" alt="@DouglasAlves" />
+ <img src="https://img.shields.io/static/v1?label=LinkedIn&message=https://www.linkedin.com/in/douglas-alves-7a55b0210/&color=black&labelColor=red" alt="@DouglasAlves" />
  <img src="https://img.shields.io/static/v1?label=Tipo&message=Desafio&color=black&labelColor=red" alt="Desafio" />
 </p>
 
