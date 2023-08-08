@@ -26,6 +26,7 @@ public class TaskService {
     }
 
     public TaskModel update(Integer id, TaskModel task){
+        getById(id);
         task.setId(id);
         return taskRepository.save(task);
     }
@@ -36,6 +37,7 @@ public class TaskService {
     }
 
     public void delete(Integer id){
+        getById(id);
         taskRepository.deleteById(id);
     }
 

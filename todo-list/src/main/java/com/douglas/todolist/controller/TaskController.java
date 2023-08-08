@@ -60,19 +60,29 @@ public class TaskController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> update(@PathVariable(value = "id") Integer id, @RequestBody @Valid TaskModel task, 
     BindingResult bindingResult ){
-        if(bindingResult.hasErrors()){
+        try{
+            if(bindingResult.hasErrors()){
             List<String> erros = bindingResult.getAllErrors().stream()
                     .map(DefaultMessageSourceResolvable::getDefaultMessage)
                     .collect(Collectors.toList());
                     return ResponseEntity.badRequest().body(erros);
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(taskService.update(id, task));
+        }catch(EntityNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-        return ResponseEntity.status(HttpStatus.OK).body(taskService.update(id, task));
+        
+        
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable(value = "id") Integer id){
-        taskService.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).body("Tarefa Deletada");
+        try{
+            taskService.delete(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Tarefa Deletada");
+        }catch(EntityNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
 }
