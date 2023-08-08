@@ -2,14 +2,14 @@ package com.douglas.todolist.service;
 
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 
 import com.douglas.todolist.model.TaskModel;
 import com.douglas.todolist.repository.TaskRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class TaskService {
@@ -17,9 +17,6 @@ public class TaskService {
     @Autowired
     TaskRepository taskRepository;
     
-    /**
-     * @return
-     */
     public List<TaskModel> list(){
         return taskRepository.findAll();
     }
@@ -33,13 +30,15 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public Optional<TaskModel> findById(Integer id){
-        return taskRepository.findById(id);
+    public TaskModel getById(Integer id){
+        return taskRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Id não encontrado: " + id));
+        
     }
 
     public void delete(Integer id){
         taskRepository.deleteById(id);
     }
+
 
 
 
